@@ -1,0 +1,161 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1d2330;
+  --muted: #667085;
+  --border: #d9dde3;
+  --accent: #2459c9;
+  --accent-text: #ffffff;
+  --error-bg: #fdecec;
+  --error-text: #a12020;
+  --empty-bg: #eef1f5;
+  --ok: #1f7a3d;
+  --warn: #9a6100;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171c;
+    --surface: #1d2129;
+    --text: #e6e8ec;
+    --muted: #9aa3b2;
+    --border: #343a46;
+    --accent: #5b8cf0;
+    --accent-text: #0d1117;
+    --error-bg: #3a1c1c;
+    --error-text: #ff9b9b;
+    --empty-bg: #252a33;
+    --ok: #5fcf85;
+    --warn: #e0b050;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "Noto Sans KR", sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.topbar h1 { margin: 0; font-size: 1.15rem; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#refresh-btn {
+  padding: 6px 18px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+#refresh-btn:disabled { opacity: 0.6; cursor: wait; }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.tabs button {
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tabs button[aria-selected="true"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+main { max-width: 1100px; margin: 0 auto; padding: 20px; }
+h2 { margin: 0 0 12px; font-size: 1.1rem; }
+
+.status:empty { display: none; }
+.status { margin-bottom: 12px; padding: 10px 12px; border-radius: 6px; }
+.status.loading { background: var(--empty-bg); color: var(--muted); }
+.status.empty { background: var(--empty-bg); }
+.status.error { background: var(--error-bg); color: var(--error-text); }
+.status strong { margin-right: 4px; }
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.summary > div {
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  min-width: 0;
+}
+.summary .wide { grid-column: 1 / -1; }
+.summary dt { color: var(--muted); font-size: 0.85rem; }
+.summary dd { margin: 4px 0 0; font-size: 1.1rem; font-weight: 600; overflow-wrap: anywhere; }
+.summary dd.loading { color: var(--muted); font-weight: 400; }
+.summary dd.error { color: var(--error-text); }
+
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+th, td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+th { font-size: 0.85rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+
+.mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.9em; }
+.muted { color: var(--muted); }
+
+.badge { padding: 1px 8px; border-radius: 10px; background: var(--empty-bg); font-size: 0.85rem; }
+.badge.state-running { color: var(--ok); }
+.badge.state-stopped, .badge.state-stopping, .badge.state-pending { color: var(--warn); }
+
+.bucket-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.bucket-list li { padding: 8px 12px; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+.bucket-list li:last-child { border-bottom: 0; }
+
+.sg-card {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.sg-card header { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; margin-bottom: 8px; }
+.sg-card h3 { margin: 0; font-size: 1rem; }
+.sg-card p { margin: 0; }

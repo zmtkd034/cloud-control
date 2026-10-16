@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Control</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Cloud Control</h1>
+    <button id="refresh-btn" type="button">조회</button>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" role="tab" data-tab="dashboard" aria-selected="true">대시보드</button>
+    <button type="button" role="tab" data-tab="ec2" aria-selected="false">EC2</button>
+    <button type="button" role="tab" data-tab="s3" aria-selected="false">S3</button>
+    <button type="button" role="tab" data-tab="sg" aria-selected="false">보안 그룹</button>
+  </nav>
+
+  <main>
+    <section id="tab-dashboard" class="panel" role="tabpanel">
+      <h2>대시보드</h2>
+      <div id="context-status" class="status"></div>
+      <dl class="summary">
+        <div><dt>계정</dt><dd id="ctx-account">-</dd></div>
+        <div><dt>리전</dt><dd id="ctx-region">-</dd></div>
+        <div class="wide"><dt>호출자 ARN</dt><dd id="ctx-arn">-</dd></div>
+        <div><dt>EC2 인스턴스</dt><dd id="count-ec2">-</dd></div>
+        <div><dt>S3 버킷</dt><dd id="count-s3">-</dd></div>
+        <div><dt>보안 그룹</dt><dd id="count-sg">-</dd></div>
+        <div><dt>마지막 조회 시각</dt><dd id="last-fetched">-</dd></div>
+      </dl>
+    </section>
+
+    <section id="tab-ec2" class="panel" role="tabpanel" hidden>
+      <h2>EC2 인스턴스</h2>
+      <div id="ec2-status" class="status"></div>
+      <div class="table-wrap">
+        <table id="ec2-table" hidden>
+          <thead>
+            <tr><th>이름</th><th>인스턴스 ID</th><th>상태</th><th>유형</th><th>프라이빗 IP</th><th>퍼블릭 IP</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tab-s3" class="panel" role="tabpanel" hidden>
+      <h2>S3 버킷</h2>
+      <div id="s3-status" class="status"></div>
+      <ul id="s3-list" class="bucket-list" hidden></ul>
+    </section>
+
+    <section id="tab-sg" class="panel" role="tabpanel" hidden>
+      <h2>보안 그룹 (인바운드 규칙)</h2>
+      <div id="sg-status" class="status"></div>
+      <div id="sg-list"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
